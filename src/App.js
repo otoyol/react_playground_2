@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
+import useCounter from "./hooks/useCounter";
+
+const App = () => {
+  const { counterValue, loading, updateCounterValue } = useCounter();
+
+  const onCounterUpdate = async () => {
+    const newCounterValue = counterValue + 1;
+
+    updateCounterValue(newCounterValue);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <p>Counter Value: {loading ? "Loading..." : counterValue}</p>
+
+        <button onClick={onCounterUpdate} disabled={loading}>
+          Increment Counter
+        </button>
+
+        <br />
+
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://react.dev"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn my React
+          Learn new React
         </a>
       </header>
     </div>
   );
-}
+};
 
 export default App;
